@@ -1,0 +1,19 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Java
+Deligo-Backend/target/
+Deligo-Backend/bin/
+*.class
+
+# Node
+Deligo-Frontend/node_modules/
+Deligo-Frontend/dist/
+
+# Editor and OS
+.idea/
+.tools/
+.DS_Store
+Thumbs.db

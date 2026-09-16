@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-DeligoApplication<deligo-backend>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/Deligo-Backend",
+      "mainClass": "com.deligo.DeligoApplication",
+      "projectName": "deligo-backend",
+      "args": "",
+      "envFile": "${workspaceFolder}/Deligo-Backend/.env"
+    }
+  ]
+}

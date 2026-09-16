@@ -1,0 +1,32 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  application:
+    name: deligo-backend
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  servlet:
+    context-path: /api
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+app:
+  frontend-origin: ${FRONTEND_ORIGIN:http://localhost:5173}
+  bootstrap-admin-email: ${BOOTSTRAP_ADMIN_EMAIL:}
+  security:
+    jwt:
+      secret: ${JWT_SECRET}
+      expiration-ms: ${JWT_EXPIRATION_MS:86400000}

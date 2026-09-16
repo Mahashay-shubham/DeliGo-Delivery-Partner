@@ -1,0 +1,5 @@
+import { useState } from 'react'
+import { useAuth } from '../features/auth/useAuth.js'
+import { profileApi } from '../features/profile/profileApi.js'
+function ProfilePage(){const {user}=useAuth();const [form,setForm]=useState({fullName:user.fullName,phone:user.phone||''});const [message,setMessage]=useState('');const [error,setError]=useState('');async function save(e){e.preventDefault();try{await profileApi.update(form);setMessage('Profile updated.');setError('')}catch(err){setError(err.message)}}return <section className="form-page"><p className="eyebrow">Account</p><h1>Your profile</h1><form className="delivery-form" onSubmit={save}>{message&&<p className="success">{message}</p>}{error&&<p className="form-error">{error}</p>}<label>Email<input value={user.email} disabled/></label><label>Full name<input value={form.fullName} onChange={e=>setForm({...form,fullName:e.target.value})} required/></label><label>Phone<input value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})}/></label><button>Save profile</button></form></section>}
+export default ProfilePage
