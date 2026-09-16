@@ -33,6 +33,11 @@ public class User {
     @Column(nullable = false, length = 100)
     private String passwordHash;
 
+    @Column(length = 64)
+    private String passwordResetTokenHash;
+
+    private Instant passwordResetExpiresAt;
+
     @Column(length = 20)
     private String phone;
 
@@ -90,6 +95,22 @@ public class User {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public String getPasswordResetTokenHash() {
+        return passwordResetTokenHash;
+    }
+
+    public void setPasswordResetTokenHash(String passwordResetTokenHash) {
+        this.passwordResetTokenHash = passwordResetTokenHash;
+    }
+
+    public Instant getPasswordResetExpiresAt() {
+        return passwordResetExpiresAt;
+    }
+
+    public void setPasswordResetExpiresAt(Instant passwordResetExpiresAt) {
+        this.passwordResetExpiresAt = passwordResetExpiresAt;
     }
 
     public String getPhone() {

@@ -1,0 +1,11 @@
+import { useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
+import { authApi } from '../features/auth/authApi.js'
+
+function ResetPasswordPage() {
+  const [params] = useSearchParams(); const token = params.get('token') || ''
+  const [form, setForm] = useState({ password: '', confirmation: '' }); const [message, setMessage] = useState(''); const [error, setError] = useState(token ? '' : 'This password reset link is invalid or incomplete.'); const [submitting, setSubmitting] = useState(false)
+  async function submit(event) { event.preventDefault(); if (form.password.length < 8) return setError('Password must contain at least 8 characters.'); if (form.password !== form.confirmation) return setError('Passwords do not match.'); setError(''); setSubmitting(true); try { setMessage((await authApi.resetPassword(token, form.password)).message) } catch (requestError) { setError(requestError.message || 'Unable to reset your password.') } finally { setSubmitting(false) } }
+  return <section className="auth-page page-enter"><div className="auth-aside"><span className="brand-mark">D</span><p className="eyebrow">Secure reset</p><h1>Create a new password.</h1><p>Choose a password you do not use elsewhere to keep your account protected.</p></div><form className="auth-card" onSubmit={submit}><p className="eyebrow">New password</p><h1>Set a new password</h1><p className="muted">Your reset link expires after 15 minutes.</p>{message ? <><p className="success">Password reset successfully.</p><p className="auth-switch"><Link to="/login">Continue to sign in</Link></p></> : <>{error && <p className="form-error">{error}</p>}<label>New password<input type="password" value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} minLength="8" required /></label><label>Confirm password<input type="password" value={form.confirmation} onChange={(event) => setForm({ ...form, confirmation: event.target.value })} minLength="8" required /></label><button type="submit" disabled={submitting || !token}>{submitting ? 'Resetting…' : 'Reset password'}</button><p className="auth-switch"><Link to="/login">← Back to sign in</Link></p></>}</form></section>
+}
+export default ResetPasswordPage

@@ -26,3 +26,7 @@ A full-stack delivery management platform with customer, delivery-partner, and a
 The frontend runs at `http://localhost:5173` and the API is served at `http://localhost:8080/api`.
 
 To bootstrap an administrator, set `BOOTSTRAP_ADMIN_EMAIL` before registering that address.
+
+## Password resets
+
+Set `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`, and `MAIL_FROM` to deliver reset links by SMTP. Without `MAIL_HOST`, local development remains available and the backend logs a clearly marked `DEV ONLY RESET LINK`; never use this fallback in production.

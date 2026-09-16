@@ -4,6 +4,9 @@ import com.deligo.dto.auth.AuthResponse;
 import com.deligo.dto.auth.LoginRequest;
 import com.deligo.dto.auth.RegisterRequest;
 import com.deligo.dto.auth.UserResponse;
+import com.deligo.dto.auth.ForgotPasswordRequest;
+import com.deligo.dto.auth.ResetPasswordRequest;
+import com.deligo.dto.auth.MessageResponse;
 import com.deligo.entity.User;
 import com.deligo.repository.UserRepository;
 import com.deligo.service.AuthService;
@@ -44,6 +47,16 @@ public class AuthController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void logout() {
         // JWTs are stateless; the client removes its token during logout.
+    }
+
+    @PostMapping("/forgot-password")
+    public MessageResponse forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
+        return authService.forgotPassword(request);
+    }
+
+    @PostMapping("/reset-password")
+    public MessageResponse resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
+        return authService.resetPassword(request);
     }
 
     @GetMapping("/me")

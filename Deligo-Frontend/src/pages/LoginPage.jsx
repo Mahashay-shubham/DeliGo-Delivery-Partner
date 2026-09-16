@@ -36,6 +36,7 @@ function LoginPage() {
         {error && <p className="form-error">{error}</p>}
         <label>Email address<input type="email" placeholder="you@example.com" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} required /></label>
         <label>Password<input type="password" placeholder="Your password" value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} required /></label>
+        <Link className="forgot-link" to="/forgot-password">Forgot password?</Link>
         <button type="submit" disabled={submitting}>{submitting ? 'Signing in…' : 'Sign in'}</button>
         <p className="auth-switch">New to Deligo? <Link to="/register">Create an account</Link></p>
       </form>
